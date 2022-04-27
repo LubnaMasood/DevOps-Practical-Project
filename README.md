@@ -33,6 +33,12 @@ The following constraints for this project were also set:
 
 ## Trello Board
 
+To ensure that an agile methodology has been followed, the progress of this project was recorded and tracked on a Trello Board. Trello was utilised for this project because it is a user-friendly and visually attractive approach to present the project tracking. 
+
+The Trello Board for this project can be broken down into the following categories:
+
+
+
 ## Entity Relation Diagram 
 
 ## CI PIPELINE
