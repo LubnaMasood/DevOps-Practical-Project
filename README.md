@@ -11,6 +11,7 @@
 * [Front End](#Front-End)
 * [Testing](#Testing)
 * [Future Improvements](#Future-Improvements)
+* [Acknowledgements](#Acknowledgements)
 
 
 
@@ -43,6 +44,20 @@ The Trello Board for this project can be broken down into the following categori
 
 ## CI PIPELINE
 
+A CI pipeline or continuous integration pipeline diagram consists of associated frameworks, services and tools that have been used during the various development phases. The approach that I have taken for this particular project can be seen below in the diagram: 
+
+<img width="1152" alt="Screenshot 2022-04-28 at 3 29 42 pm" src="https://user-images.githubusercontent.com/101265654/165776029-6618ea65-5c9a-4d77-bf8c-02fad3b86e59.png">
+
+This pipeline allows for a rapid and straightforward process from development, testing and to deployment by automating the integration process. 
+
+* Unit Testing: pytest- unit tests need to be run every time the code is updated to make sure that the microservices function correctly before the deployment stage. 
+
+* Webhooks- automates the running of the CI pipeline in Jenkins whenever new code is pushed to the dev branch in GitHub.  
+
+* Docker Compose: build and push- Jenkin's credentials system is used to handle logging into Docker Hub, the new images are then pushed to the GitHub repository. 
+
+* Ansible: configure- ansible configures various things including reloading nginx with updates to the nginx.config file; setting up the swarm and joining the swarm on all worker nodes and installing docker and docker-compose dependencies.  
+
 ## Risk Assessment 
 
 ## 4 Services
@@ -52,3 +67,7 @@ The Trello Board for this project can be broken down into the following categori
 ## Testing 
 
 ## Future Improvements
+
+## Acknowledgements
+
+The CI Pipeline template is from QA Community.
