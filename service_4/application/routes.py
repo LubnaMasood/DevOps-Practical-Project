@@ -4,8 +4,6 @@ import requests, jsonify
 
 @app.route('/service_4', methods=["GET", "POST"])
 def service_4():
-    diceroll = requests.get('http://service_2:5000/get_randomnumber').text
-    randomsport = requests.get('http://service_3:5000/get_randomword').text
     winnerslist = ["football football", "swimming swimming", "cricket cricket cricket", "netball netball netball", "golf golf golf golf", "surfing surfing surfing surfing"]
     prizestring = " "
     
