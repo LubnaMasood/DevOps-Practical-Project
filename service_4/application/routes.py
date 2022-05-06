@@ -1,10 +1,10 @@
 from application import app 
-from flask import Flask, Response, request 
-import requests, jsonify 
+from flask import Flask, Response, request, jsonify
+import requests
 
 @app.route('/service_4', methods=["GET", "POST"])
 def service_4():
-    winnerslist = ["football football", "swimming swimming", "cricket cricket cricket", "netball netball netball", "golf golf golf golf", "surfing surfing surfing surfing"]
+    winnerslist = ["football", "swimming swimming", "cricket cricket cricket", "netball netball netball", "golf golf golf golf", "surfing surfing surfing surfing", "basketball basketball basketball basketball", "boxing boxing boxing", "athletics athletics athletics", "badminton badminton badminton",  "rugby rugby rugby",  "iceskating iceskating iceskating"]
     prizestring = " "
     
     if any(ele in randomsport for ele in winnerslist) and diceroll == "1":
@@ -44,5 +44,5 @@ def service_4():
         prizestring = 6000
     else: 
         prizestring = "0"
-    data = {"randomsport": randomsport, "diceroll": diceroll, "prizeamount": prize_string}
+    data = {"randomsport": randomsport, "diceroll": diceroll, "prizeamount": prizestring}
     return jsonify(data)

@@ -1,7 +1,7 @@
 <html lang="en">
     <head>
         <meta charset="UTF-8">
-        <body style="background-color:lightpink"></body>
+        <body style="background-color:lightgoldenrodyellow"></body>
         <h1> Here Are Your Past Spins!{{ title }}</h1>
         <div>
             <table style="width:70%">
@@ -12,11 +12,11 @@
                 </tr>
                 {% for p in prize %}
                 <tr>
-                    <td> {{ p.diceroll }} </td> 
-                    <td> {{ p.sport }} </td>
-                    <td> {{ p.prizeamount }} </td>
+                    <td> {{ service_2 }} </td> 
+                    <td> {{ service_3 }} </td>
+                    <td> {{ service_4 }} </td>
                     <tr>
-                    </tr> {% endblock body %}
+                    </tr> {% endfor %}
                 </table>
                 <br> 
                 <br> <br> <a href="{{url_for('prizegenerator')}}" type="button">Press Here to Spin Again!</a> <br>
@@ -24,3 +24,4 @@
                 <br> <a href="{{url_for('home')}}" type="button"> Go Back</a> <br>
         </body>
     </html>
+
