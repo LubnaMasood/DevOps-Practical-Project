@@ -1,11 +1,11 @@
-from flask import Flask, Response, request, url_for, redirect, render_template
+from flask import Flask, Response, request
 from application import app 
 import random
+import string
 
 
-@app.route('/get_randomnumber', methods=["GET"])
+@app.route('/randomnumber', methods=["GET"])
 def randomnumber(): 
-    randomnumber_string = " "
     ticketnumber_choice = random.randint(1,12)
     randomnumber_string += str(randomnumber)
     return Response(f"{randomnumber_string}", mimetype="text/plain")

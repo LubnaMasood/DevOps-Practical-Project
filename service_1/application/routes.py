@@ -1,5 +1,5 @@
 from application import app 
-from flask import Flask, redirect, request, url_for, render_template, jsonify
+from flask import Flask, request, render_template, jsonify, Response
 import requests
 
 @app.route('/', methods=['GET', 'POST'])
@@ -8,9 +8,9 @@ def home():
 
 @app.route('/prizegenerator', methods=['GET','POST'])
 def prizegenerator():
-    service_2 = requests.get('http://service_2:5000/get_randomnumber').text
-    service_3 = requests.get('http://service_3:5000/get_randomword').text
+    diceroll = requests.get('http://service_2:5000/randomnumber').text
+    word_wheel = requests.get('http://service_3:5000/randomword').text
 
-    fields = {"service_2": service_2, "service_3": service_3}
-    service_4 = requests.get('http://service_4:5000/service_4').text
-    return render_template('prizegenerator.html')
+    fields = {"randomnumber": randomnumber, "randomword": randomword}
+    prizeamount = requests.post'http://service_4:5000/service_4').jsonify()
+    return render_template('prizegenerator.html', diceroll=diceroll, word_wheel=word_wheel, prizeamount=prizeamount)
