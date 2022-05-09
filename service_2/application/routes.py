@@ -6,6 +6,5 @@ import string
 
 @app.route('/randomnumber', methods=["GET"])
 def randomnumber(): 
-    ticketnumber_choice = random.randint(1,12)
-    randomnumber_string += str(randomnumber)
+    randomnumber_string = random.randint(1,12)
     return Response(f"{randomnumber_string}", mimetype="text/plain")

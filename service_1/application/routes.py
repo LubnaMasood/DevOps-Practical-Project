@@ -11,6 +11,6 @@ def prizegenerator():
     diceroll = requests.get('http://service_2:5000/randomnumber').text
     word_wheel = requests.get('http://service_3:5000/randomword').text
 
-    fields = {"randomnumber": randomnumber, "randomword": randomword}
-    prizeamount = requests.post'http://service_4:5000/service_4').jsonify()
+    fields = {"randomnumber": diceroll, "randomword": word_wheel}
+    prizeamount = requests.post('http://service_4:5000/service_4', json=fields).text
     return render_template('prizegenerator.html', diceroll=diceroll, word_wheel=word_wheel, prizeamount=prizeamount)
