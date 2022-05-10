@@ -2,6 +2,7 @@ from application import app
 from flask import Flask, request, render_template, jsonify, Response
 import requests
 
+
 @app.route('/', methods=['GET', 'POST'])
 def home():
     return render_template('home.html')
