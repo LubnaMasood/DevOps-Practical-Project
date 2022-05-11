@@ -1,31 +1,21 @@
 pipeline{
     agent any
-    stages{
+    stages {
         stage('Testing app'){
             steps{
                 sh "bash test.sh"
             }
         }
-        // stage('Installing dependencies'){
-        //     steps{
-        //         sh "bash scripts/dependencies.sh"
-        //     }
-        // }
-        // stage('Building containers'){
-        //     steps{
-        //         sh "docker login -u ${DOCKERHUB_LOGIN_USR} -p ${DOCKERHUB_LOGIN_PSW}"
-        //         sh "bash scripts/containers.sh"
-        //     }
-        // }
-        // stage('Running ansible tasks'){
-        //     steps{
-        //         sh "bash scripts/ansible.sh"
-        //     }
-        // }
-        // stage('Deploying'){
-        //     steps{
-        //         sh "bash scripts/deploy.sh"
-        //     }
-        // }
+        stage('Build and push images') {
+            environment {
+                DOCKER_USERNAME = credentials('docker_username')
+                DOCKER_PASSWORD = credentials('docker_password')
+            }
+            steps {
+                sh "docker-compose build --parallel"
+                sh "docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD"
+                sh "docker-compose push"
+            }
+        }
     }
 }
