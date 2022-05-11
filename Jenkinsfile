@@ -20,7 +20,7 @@ pipeline{
         }
         stage('Deploy') {
             steps {
-                sh "scp -i ~/.ssh/ansible docker-compose.yaml swarm-manager:/home/jenkins/docker-compose.yaml"
+                sh "scp -i ~/.ssh docker-compose.yaml swarm-manager:/home/jenkins/docker-compose.yaml"
                 sh "scp -i ~/.ssh/ansible nginx.conf swarm-manager:/home/jenkins/nginx.conf"
                 sh "ansible-playbook -i ansible/inventory.yaml ansible/playbook.yaml"
             }
