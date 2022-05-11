@@ -12,7 +12,8 @@ pipeline{
                 DOCKER_PWORD = credentials('docker_pword')
             }
             steps {
-                sh "docker-compose build --parallel" 
+                sh "ln -s DevOps-Project2/docker-compose.yaml build" 
+                sh "docker-compose build --parallel"
                 sh "docker login -u $DOCKER_UNAME -p $DOCKER_PWORD"
                 sh "docker-compose push"
             }
