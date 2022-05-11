@@ -18,5 +18,20 @@ pipeline{
                 sh "docker-compose push"
             }
         }
+        stage('Deploy') {
+            steps {
+                sh "scp -i ~/.ssh/ansible docker-compose.yaml swarm-manager:/home/jenkins/docker-compose.yaml"
+                sh "scp -i ~/.ssh/ansible nginx.conf swarm-manager:/home/jenkins/nginx.conf"
+                sh "ansible-playbook -i ansible/inventory.yaml ansible/playbook.yaml"
+            }
+        }
     }
-}
+    // post {
+        // always {
+        //     junit '**/*.xml'
+        //     cobertura coberturaReportFile: 'service_1/coverage.xml', failNoReports: false
+        //     cobertura coberturaReportFile: 'service_2/coverage.xml', failNoReports: false
+        //     cobertura coberturaReportFile: 'service_3/coverage.xml', failNoReports: false
+        //     cobertura coberturaReportFile: 'service_4/coverage.xml', failNoReports: false
+        // }
+    }
