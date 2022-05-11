@@ -2,7 +2,7 @@ version: "3.8"
 services:
   nginx:
     container_name: nginx_1
-    image: nginx:latest
+    image: docker.io/lubna1x/nginx:latest
     ports:
     - target: 80
       published: 80
@@ -16,7 +16,7 @@ services:
 
   service_1:
     container_name: service_1
-    image: service_1:latest
+    image: docker.io/lubna1x/service_1:latest
     build: ./service_1
     depends_on: 
     - service_2
@@ -25,17 +25,17 @@ services:
 
   service_2:
     container_name: service_2
-    image: service_2:latest
+    image: docker.io/lubna1x/service_2:latest
     build: ./service_2
 
   service_3:
     container_name: service_3
-    image: service_3:latest
+    image: docker.io/lubna1x/service_3:latest
     build: service_3
 
   service_4:
     container_name: service_4
-    image: service_4:latest
+    image: docker.io/lubna1x/service_4:latest
     build: service_4
     depends_on:
     - service_2
