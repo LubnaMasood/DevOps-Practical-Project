@@ -8,12 +8,12 @@ pipeline{
         }
         stage('Build and push images') {
             environment {
-                DOCKER_USERNAME = credentials('docker_username')
-                DOCKER_PASSWORD = credentials('docker_password')
+                DOCKER_UNAME = credentials('docker_uname')
+                DOCKER_PWORD = credentials('docker_pword')
             }
             steps {
                 sh "docker-compose build --parallel"
-                sh "docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD"
+                sh "docker login -u $DOCKER_UNAME -p $DOCKER_PWORD"
                 sh "docker-compose push"
             }
         }
