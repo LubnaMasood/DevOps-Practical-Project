@@ -2,7 +2,7 @@
 # tasks file for installing-docker
 - name: Installing apt repos
   apt:
-    update_cache: yes
+    update_cache: true
     pkg:
       - apt-transport-https
       - ca-certificates
