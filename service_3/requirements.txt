@@ -1,0 +1,11 @@
+flask
+flask_sqlalchemy
+pymysql
+SQLAlchemy
+Jinja2
+markupsafe
+requests
+itsdangerous
+gunicorn
+pytest
+pytest-cov

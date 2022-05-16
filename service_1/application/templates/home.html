@@ -1,0 +1,13 @@
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <body style="background-color:lightgoldenrodyellow"></body>
+        <h1>Welcome To Your Prize Generator!{{ title }}</h1>
+        <br> <h2> Roll the Dice & Spin the Word Wheel to Win Prizes!</h2><br>
+        <br> 
+        <br><a href="{{ url_for('prizegenerator') }}" type="button">Press Here To Spin!</a><br>
+        <br>
+        {% block body %}
+        {% endblock body%}
+    </body>
+</html>

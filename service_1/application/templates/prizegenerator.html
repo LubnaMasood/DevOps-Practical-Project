@@ -1,0 +1,28 @@
+<html lang="en">
+    <head>
+        {% block content %}
+        <meta charset="UTF-8">
+        <body style="background-color:lightgoldenrodyellow"></body>
+        <h1> Here Are Your Past Spins!{{ title }}</h1>
+        <h2)> Rolling Update!</h2>
+        <div>
+            <table style="width:70%">
+                <tr>
+                    <th>Dice Roll</th>
+                    <th>Word Wheel</th>
+                    <th>Prize Amount</th>
+                </tr>
+                <tr>
+                    <td> {{ diceroll }} </td> 
+                    <td> {{ word_wheel }} </td>
+                    <td> {{ prizeamount }} </td>
+                    <tr>
+                    </tr> 
+                </table>
+                <br> 
+                <br> <br> <a href="{{url_for('prizegenerator')}}" type="button">Press Here to Spin Again!</a> <br>
+                <br> 
+                <br> <a href="{{url_for('home')}}" type="button"> Go Back</a> <br>
+                {% endblock %}
+        </body>
+    </html>

@@ -1,0 +1,16 @@
+- hosts: all
+  become: yes
+  roles:
+    - installing-docker
+
+- hosts:
+  - swarm-manager
+  become: yes
+  roles:
+    - swarm-setup
+
+- hosts:
+  - swarm-worker
+  become: yes
+  roles:
+    - swarm-join
