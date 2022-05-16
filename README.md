@@ -196,5 +196,5 @@ With more time the improvements that I would implement include:
 ## Acknowledgements
 
 * Many thanks to the trainer Victoria Sacre for all her help and guidance. 
-* The 22MarEnable1 Cohort for their support and advice 
+* The 22MarEnable1 Cohort for their support and advice.
 * The CI Pipeline template is from QA Community.
