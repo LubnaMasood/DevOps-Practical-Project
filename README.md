@@ -10,7 +10,7 @@
 * [Four Services Diagram](#Four-Services-Diagram)
 * [CI PIPELINE](#CI-PIPELINE)
 * [Risk Assessment](#Risk-Assessment)
-* [Cloud Server: GCP](#Cloud-Server:GCP)
+* [Cloud Server: GCP](#Cloud-Server-GCP)
 * [Jenkins Pipeline](#Jenkins-Pipeline)
 * [Front End](#Front-End)
 * [Testing](#Testing)
