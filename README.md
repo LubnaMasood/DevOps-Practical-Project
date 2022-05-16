@@ -7,9 +7,11 @@
 
 * [Objective](#Objective)
 * [Trello Board](#Trello-Board)
-* [ERD](#Entity-Relation-Diagram)
+* [Four Services Diagram](#Four-Services-Diagram)
 * [CI PIPELINE](#CI-PIPELINE)
 * [Risk Assessment](#Risk-Assessment)
+* [Cloud Server: GCP](#Cloud-Server-GCP)
+* [Jenkins Pipeline](#Jenkins-Pipeline)
 * [Front End](#Front-End)
 * [Testing](#Testing)
 * [Future Improvements](#Future-Improvements)
@@ -20,7 +22,7 @@
 
 ## Objective
 
-The objective of this project was to produce an application consisting of four microservices, which interact with one another to generate objects using some defined logic. Service one will render templates and communicate with the 3 other services. Both services two and three will generate random objects; service four will also create an object- based on the objects generated from services two and three. 
+The objective of this project was to produce an application consisting of four microservices, which interact with one another to create a prize generator app. Service one will render templates and communicate with the three other services. Service two will generate a random number between 1-12; service three will generate a random word. Service four will create a prize amount- based on the information generated from services two and three.
 
 The following constraints for this project were also set: 
 
@@ -29,9 +31,9 @@ The following constraints for this project were also set:
 * CI Server: Jenkins
 * Configuration Management: Ansible Playbooks 
 * Cloud server: GCP virtual machines
-* Containerisation: Docker
-* Orchestration Tool: Docker Swarm
-* Reverse Proxy: NGINX
+* Containerisation: Docker - all four services are containerised and images are pushed to Dockerhub
+* Orchestration Tool: Docker Swarm - the containers must be replicated across two VM's 
+* Reverse Proxy: NGINX - the app is accessible to users through a reverse proxy 
 * Webhooks: Triggers Jenkins Build When the Code has been altered
 
 ## Trello Board
@@ -54,8 +56,15 @@ The Trello Board for this project can be broken down into the following categori
 
 * Done: The tasks that have been completed and added to the project. 
 
-## Entity Relation Diagram 
+## Four Services Diagram
 
+This project relies on four microservices that work with each other to create a functioning prize generator. Service one is the front-end component of the application. An HTML template (prizegenerator.html) allows users to see the page on their screens. A dice roll, word wheel spin and prize amount are generated for the users and displayed on the screen. 
+
+For users to see their past spins, service two must generate a number randomly. Also, service three must generate a random word. The front-end then utilises GET requests to access the information, which is then sent to service four which performs a POST request from the front-end to display the data from the other services. 
+
+The diagram below illustrates this process: 
+
+<img width="607" alt="Screenshot 2022-05-16 at 2 54 06 pm" src="https://user-images.githubusercontent.com/101265654/168608898-b71cdb11-9d90-4c39-b674-ade77d43a838.png">
 
 ## CI PIPELINE
 
@@ -85,8 +94,57 @@ Further risks were discovered and subsequently added as the project developed:
 
 <img width="916" alt="Screenshot 2022-05-16 at 1 26 19 am" src="https://user-images.githubusercontent.com/101265654/168501421-45a0060d-c493-4beb-868f-124112ce933d.png">
 
+## Cloud Server: GCP
+
+For this project, the cloud server utilised is GCP (Google Cloud Platform). Four medium-sized virtual machines were set to europe-west2-b; this allowed the VMs to work together harmoniously within the network. Each VM had its own role: 
+
+**1. project2-instance:** constructs the application, connects to GitHub and holds the Ansible Playbook to configure the other three VMs.
+
+**2. jenkins:** constructs SSH key pair to run the docker-compose.yaml file, configure nginx and run the Ansible Playbook. 
+
+**3. swarm-manager:** the manager of the Docker Swarm maintains cluster management responsibilities. Allowing multiple containers to be deployed across various host machines. 
+
+**4. swarm-worker:** the worker within the swarm is connected to the manager. The manager node sends tasks to the worker, which it receives and executes.
+
+<img width="417" alt="Screenshot 2022-05-16 at 12 12 00 pm" src="https://user-images.githubusercontent.com/101265654/168580590-e0722aeb-4564-4330-bb23-0c6f7db354ed.png">
+
+## Jenkins Pipeline 
+
+For this project, Jenkins was utilised by creating a Jenkinsfile. Several bash scripts were executed to build the docker images for the four services to log in and push the images up to Dockerhub. My Dockerhub username and password were set as environmental variables; by creating secret text files in Jenkins Credentials to ensure the information is kept private. Once docker had successfully logged in, a command was given to push the newly built images up to Dockerhub.
+
+The final stage in the pipeline was to run the Ansible script via the playbook and inventory files. By assigning the roles and tasks, I could direct the continuous deployment through Docker Swarm. A webhook was also included in the Jenkins pipeline; a git branch was connected to the webhook. Therefore, if a change were made to the application's code, this would trigger a new build- updating the app without causing downtime for users.
+
+The Three Stages In The Pipline were as followed: 
+
+* Testing app
+* Build and push images
+* Deploy
+
+<img width="639" alt="Screenshot 2022-05-16 at 2 19 24 pm" src="https://user-images.githubusercontent.com/101265654/168601858-2c077de2-d418-4c93-b159-2fc4ad3416ba.png">
+
+The successful build resulted in a functioning web application which produced the following console output:
+
+<img width="639" alt="Screenshot 2022-05-16 at 2 21 09 pm" src="https://user-images.githubusercontent.com/101265654/168602174-6aa45f7e-0ad7-4128-9145-ff00e482344c.png">
+
 ## Front End
 
+The entry point for this app is the homepage, navigated with the '/' url suffix. When a user enters the website, they are greeted with the page:
+
+<img width="474" alt="Screenshot 2022-05-16 at 3 55 25 pm" src="https://user-images.githubusercontent.com/101265654/168622187-e8c46179-abd1-41a4-9e47-e059cd81d223.png">
+
+The user sees the greeting message 'Welcome To Your Prize Generator!'. Beneath the greeting message, instructions are also displayed on the screen. Instructions are provided to the user to direct them on navigating the app. The user then clicks on the 'Press Here to Spin!' button.
+
+They are redirected to the next page:
+
+<img width="490" alt="Screenshot 2022-05-16 at 4 02 12 pm" src="https://user-images.githubusercontent.com/101265654/168623619-edbaf435-f3ec-4306-9bb8-b9a0ce5690b6.png">
+
+This is the prizegenerator page, navigated with the '/prizegenerator' url suffix. A user sees the message 'Here Are Your Past Spins!. Below, a dice roll number, word wheel and prize amount are generated. The logic behind this app is that if an individual gets a random word that begins with the letter 'B', they win a random prize from the list. For instance, in the image above, a user landed on the word 'swimming'; hence, they did not win anything.
+
+However, if they land on a word that begins with the letter B, then they win a prize, as seen below: 
+
+<img width="590" alt="Screenshot 2022-05-16 at 4 15 16 pm" src="https://user-images.githubusercontent.com/101265654/168626152-01daefe0-004a-4610-ab2d-d87490a32e73.png">
+
+Below the prize generator are two buttons. The 'Press Here to Spin Again' button allows users to keep spinning the wheel to get a different outcome. Also, there is a 'Go Back' button, which redirects users back to the homepage. 
 
 ## Testing 
 
@@ -127,8 +185,13 @@ Four tests were written for Service Four:
 
 <img width="584" alt="Screenshot 2022-05-13 at 10 20 09 pm" src="https://user-images.githubusercontent.com/101265654/168391105-d3de9279-b2e7-49ed-a13f-6a5cbfc32018.png">
 
-## Future Improvements
+## Future Improvements 
 
+With more time the improvements that I would implement include:
+
+* Add a database to hold users information.
+* Improve testing to include integration testing.
+* Using a locally hosted Nexus repository, instead of fetching the images from Dockerhub. 
 
 ## Acknowledgements
 
