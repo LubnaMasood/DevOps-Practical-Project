@@ -32,6 +32,7 @@ The following constraints for this project were also set:
 * Containerisation: Docker
 * Orchestration Tool: Docker Swarm
 * Reverse Proxy: NGINX
+* Webhooks: Triggers Jenkins Build When the Code has been altered
 
 ## Trello Board
 
@@ -77,6 +78,12 @@ This pipeline allows for a rapid and straightforward process from development, t
 Beneath you can find my detailed risk assessment, which provides a comprehensive evaluation of the risks associated with the development of this project:
 
 Here is the initial risk assessment I conducted at the start of development:
+
+<img width="931" alt="Screenshot 2022-05-16 at 1 27 01 am" src="https://user-images.githubusercontent.com/101265654/168501283-18da6fa5-a011-471a-8b96-59ab9b92bef3.png">
+
+Further risks were discovered and subsequently added as the project developed: 
+
+<img width="916" alt="Screenshot 2022-05-16 at 1 26 19 am" src="https://user-images.githubusercontent.com/101265654/168501421-45a0060d-c493-4beb-868f-124112ce933d.png">
 
 ## Front End
 
